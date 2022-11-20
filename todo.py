@@ -31,17 +31,22 @@ while (True):
         print("[*] Task added!")
     elif cmd == 'd':
         if todo:
-            print("Tasks:")
+            print("-----------------------------------------")
+            print("Tasks")
+            print("-----------------------------------------")
             for task in todo:
-                print("[*] ", task)
+                print("[+] ", task)
+            print("-----------------------------------------")
             task = input("Enter a task to delete: ")
             if task in todo:
                 todo.remove(task)
-                print("Task deleted", task)
+                print("[*] Task deleted.")
             else:
-                print("Task not found")
+                print("[*] Task not found!")
         else:
-            print("No tasks to delete")
+            print("-----------------------------------------")
+            print("[!] No tasks found!\n[*] Type 'a' to add a task.")
+            print("-----------------------------------------")
     elif cmd == 'v':
         if todo:
             print("-----------------------------------------")
@@ -61,6 +66,7 @@ while (True):
         break
     else:
         print("[!] Wrong Command\n[*] Type 'h' to know all the commands.")
+
 goodbye = '''
 -----------------------------------------
 See Ya! Have good one!
