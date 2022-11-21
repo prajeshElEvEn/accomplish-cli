@@ -5,7 +5,6 @@ fpath = 'todo.txt'
 print("-----------------------------------------")
 print("Welcome to Accomplish")
 print("-----------------------------------------")
-# print('\n')
 
 
 instructions = """
@@ -22,7 +21,6 @@ instructions = """
 -----------------------------------------
 """
 print(instructions)
-# print("[*] Type 'h' for help.")
 
 todo = []
 
@@ -37,23 +35,28 @@ while (True):
         f.close()
         print("[*] Task added!")
     elif cmd == 'd':
-        if todo:
+        if os.stat(fpath).st_size != 0:
             print("-----------------------------------------")
             print("Tasks")
             print("-----------------------------------------")
-            for task in todo:
+            f = open("todo.txt", "r")
+            for task in f:
                 print("[+] ", task)
             print("-----------------------------------------")
-            task = input("Enter a task to delete: ")
-            if task in todo:
-                todo.remove(task)
-                print("[*] Task deleted.")
-            else:
-                print("[*] Task not found!")
+            tasktodel = input("Enter a task to delete: ")
+            f = open("todo.txt", "r")
+            lines = f.readlines()
+            f = open("todo.txt", "w")
+            for line in lines:
+                if line.strip() != tasktodel:
+                    f.write(line)
+            f.close()
+            print("[*] Task deleted.")
         else:
             print("-----------------------------------------")
             print("[!] No tasks found!\n[*] Type 'a' to add a task.")
             print("-----------------------------------------")
+        f.close()
     elif cmd == 'v':
         f = open("todo.txt", "r")
         if os.stat(fpath).st_size != 0:
